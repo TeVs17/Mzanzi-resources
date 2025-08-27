@@ -1,34 +1,20 @@
-// Scroll fade-in animation
-const cards = document.querySelectorAll(".fade-in");
+// Fade-in scroll animation
+document.addEventListener("DOMContentLoaded", function () {
+  const faders = document.querySelectorAll(".fade-in");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.2 });
+  const appearOptions = {
+    threshold: 0.2, // 20% of element is visible
+  };
 
-cards.forEach(card => {
-  observer.observe(card);
-});
+  const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target); // Trigger only once
+    });
+  }, appearOptions);
 
-// Active nav highlight
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
-    if (scrollY >= sectionTop) {
-      current = section.getAttribute("id");
-    }
-  });
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + current) {
-      link.classList.add("active");
-    }
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
   });
 });
