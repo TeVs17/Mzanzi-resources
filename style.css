@@ -7,56 +7,58 @@
   scroll-behavior: smooth; /* Smooth scroll */
 }
 
-/* 🔥 Background Gradient */
+/* Background setup */
 .background {
   position: fixed;
-  inset: 0;
-  background: linear-gradient(270deg, #ff0000, #444, #000);
-  background-size: 600% 600%;
-  animation: gradient 15s ease infinite;
-  z-index: -2;
-}
-
-/* Background Image Overlay */
-.bg-image {
-  position: absolute;
-  inset: 0;
-  background: url("gallery/logo.jpg") no-repeat center/cover;
-  opacity: 0.25;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   z-index: -1;
 }
 
-/* Animated Gradient Keyframes */
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.bg-image {
+  background: url("gallery/logo.jpg") no-repeat center center/cover; /* Replace with your background image */
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-/* 🔺 Geometric Shapes */
 .shape {
   position: absolute;
-  opacity: 0.2;
-  filter: blur(30px);
-}
-.shape1 {
-  width: 200px;
-  height: 200px;
-  background: red;
   border-radius: 50%;
-  top: 10%;
-  left: 5%;
-}
-.shape2 {
-  width: 250px;
-  height: 250px;
-  background: gray;
-  transform: rotate(45deg);
-  bottom: 15%;
-  right: 10%;
+  opacity: 0.4;
+  animation: float 20s infinite ease-in-out;
 }
 
-/* ✅ Sticky Navbar */
+.shape1 {
+  width: 400px;
+  height: 400px;
+  background: #ff6b6b;
+  top: -100px;
+  left: -100px;
+}
+
+.shape2 {
+  width: 600px;
+  height: 600px;
+  background: #1f1f1f;
+  bottom: -150px;
+  right: -150px;
+}
+
+/* Animation */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+/* Sticky Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -69,23 +71,28 @@
   z-index: 10;
   backdrop-filter: blur(5px);
 }
+
 .navbar .logo {
   font-size: 1.3rem;
   font-weight: bold;
   color: #ff4d4d;
 }
+
 .navbar ul {
   list-style: none;
   display: flex;
   gap: 2rem;
 }
+
 .navbar ul li a {
   text-decoration: none;
   color: white;
   font-weight: 500;
   transition: color 0.3s;
 }
-.navbar ul li a:hover {
+
+.navbar ul li a:hover,
+.navbar ul li a.active {
   color: #ff4d4d;
 }
 
@@ -104,10 +111,12 @@
   justify-content: center;
   padding: 2rem;
 }
+
 .hero h1 {
   font-size: 3rem;
   font-weight: bold;
 }
+
 .hero p {
   margin-top: 1rem;
   font-size: 1.2rem;
@@ -122,6 +131,7 @@
   width: 90%;
   max-width: 1000px;
 }
+
 .section h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -137,6 +147,7 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
 #contact p {
   font-size: 17px;
   color: #ffcccc;
@@ -145,56 +156,49 @@
   margin: 0.5rem auto;
 }
 
-/* Services Cards */
-.cards {
+/* Services Page Cards */
+.cards, .services-list {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
 }
-.card {
-  background: rgba(255,255,255,0.1);
+
+.card, .service {
+  background: rgba(48,47,47,0.777);
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 280px;
-  transition: transform 0.3s;
+  transition: transform 0.3s, background 0.3s;
 }
-.card:hover {
+
+.card:hover, .service:hover {
   transform: translateY(-10px);
+  background: rgba(48, 47, 47, 0.777);
 }
 
-/* Gallery */
-.gallery {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.gallery img {
-  width: 300px;
-  border-radius: 10px;
-  transition: transform 0.3s;
-}
-.gallery img:hover {
-  transform: scale(1.05);
+.card h3, .service h3 {
+  font-size: 1.4rem;
+  color: red;
+  margin-bottom: 10px;
 }
 
-/* Fade-in Animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+.card p, .service ul {
+  font-size: 1rem;
+  color: #fff;
+  line-height: 1.5;
 }
 
-/* Footer */
-footer {
-  padding: 1rem;
-  background: rgba(0,0,0,0.8);
+.service ul {
+  list-style-type: disc;
+  margin-left: 20px;
 }
+
+.service ul li {
+  margin-bottom: 6px;
+}
+
+/* Video Section */
 .video-container {
   display: flex;
   justify-content: center;
@@ -207,4 +211,24 @@ footer {
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Fade-in Animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer */
+footer {
+  padding: 1.0rem;
+  background: rgba(59, 59, 59, 0.8);
+  text-align: center;
+  color: white
 }
